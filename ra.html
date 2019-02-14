@@ -15,8 +15,8 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; display:block; background-color:#005dab;'>
-   <button type="button" onclick="alert('Hello world!')" style="z-index:9999999!important;display:block;"  id='test'>Click Me!</button>
+<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; display:block; height: 300px;background-color:#005dab;'>
+   <button type="button" onclick="alert('Hello world!')" style="z-index:9999999!important;display:none;"  id='test'>Click Me!</button>
 </div>
 <video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none" >
 	<source src="https://stemkoski.github.io/AR-Examples/video/sintel.ogv" type='video/ogg; codecs="theora, vorbis"'>
@@ -42,7 +42,7 @@ initialize();
 animate();
 	
 function myFunction() {
-  document.getElementById("test").style.display = "none";
+  document.getElementById("test").style.display = "block";
 }
 function initialize()
 {
