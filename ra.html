@@ -49,7 +49,7 @@ function initialize()
 	
    
        
-   myFunction();
+ 
 	scene = new THREE.Scene();
 
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
@@ -105,8 +105,8 @@ function initialize()
 	
 	// handle resize event
 	window.addEventListener('resize', function(){
-		onResize()
-		
+		onResize();
+		  myFunction();
 	});
 	
 	////////////////////////////////////////////////////////////
@@ -162,7 +162,7 @@ function update()
 function render()
 {
 	renderer.render( scene, camera );
-	myFunction();
+	
 }
 
 
