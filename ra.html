@@ -42,7 +42,7 @@ initialize();
 animate();
 
 function initialize()
-{//////////////////////////
+{
 	
    
        
@@ -90,9 +90,10 @@ function initialize()
 		arToolkitSource.copySizeTo(renderer.domElement)	
 		if ( arToolkitContext.arController !== null )
 		{
-			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
+			  document.getElementById("test").style.display="block";
 		}	
-		  document.getElementById("test").style.display="block";
+		
 	}
 
 	arToolkitSource.init(function onReady(){
