@@ -1,6 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
 	<title>Hello, world!</title>
 	<!-- include three.js library -->
 	<script src='https://stemkoski.github.io/AR-Examples/js/three.js'></script>
@@ -15,64 +15,54 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-
-<video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none" >
-	<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/AwigddpFyM4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
--->	<source src="Comprando_desktop.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-</video>
-	<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; display:block; background-color:#005dab;'>
+<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; display:block; background-color:#005dab;'>
    <button type="button" onclick="get();" style="z-index:9999999!important;"  id='test'>Comprar productos</button>
 </div>
+
+<video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none" >
+	<!--<source src="https://stemkoski.github.io/AR-Examples/video/sintel.ogv" type='video/ogg; codecs="theora, vorbis"'>-->
+	
+	<source src="Comprando_desktop.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+</video>
+	
 <!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
 -->
 
 <script>
-
 var scene, camera, renderer, clock, deltaTime, totalTime;
-
 var arToolkitSource, arToolkitContext;
-
 var markerRoot1;
-
 var mesh1;
-
 initialize();
 animate();
-
 function get(){
 
 window.location.href = "https://www.lehmannvirtual.com/search/?field=staedtler";
 }
-
-
-
-function initialize()
-{
 	
-   
-       
-   
+function myFunction() {
+ document.getElementById("test").style.display = "block";
+}
+function initialize()
+{       
 	scene = new THREE.Scene();
-
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
 	scene.add( ambientLight );
 				
 	camera = new THREE.Camera();
 	scene.add(camera);
-
 	renderer = new THREE.WebGLRenderer({
 		antialias : true,
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 	renderer.setSize( 600, 480 );
-	renderer.domElement.style.position = 'absolute'
-	renderer.domElement.style.top = '500px'
+	renderer.domElement.style.position = 'relative'
+	renderer.domElement.style.top = '100px'
 	renderer.domElement.style.left = '0px'
 	document.body.appendChild( renderer.domElement );
-
 	clock = new THREE.Clock();
 	deltaTime = 0;
 	totalTime = 0;
@@ -86,11 +76,9 @@ function initialize()
 	////////////////////////////////////////////////////////////
 	// setup arToolkitSource
 	////////////////////////////////////////////////////////////
-
 	arToolkitSource = new THREEx.ArToolkitSource({
 		sourceType : 'webcam',
 	});
-
 	function onResize()
 	{
 		arToolkitSource.onResize()	
@@ -98,24 +86,23 @@ function initialize()
 		if ( arToolkitContext.arController !== null )
 		{
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
-			  document.getElementById("test").style.display="block";
+			
 		}	
 		
 	}
-
 	arToolkitSource.init(function onReady(){
 		onResize()
 	});
 	
 	// handle resize event
 	window.addEventListener('resize', function(){
-		onResize()
+		onResize();
+		
 	});
 	
 	////////////////////////////////////////////////////////////
 	// setup arToolkitContext
 	////////////////////////////////////////////////////////////	
-
 	// create atToolkitContext
 	arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'https://stemkoski.github.io/AR-Examples/data/camera_para.dat',
@@ -126,20 +113,16 @@ function initialize()
 	arToolkitContext.init( function onCompleted(){
 		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
 	});
-
 	////////////////////////////////////////////////////////////
 	// setup markerRoots
 	////////////////////////////////////////////////////////////
-
 	// build markerControls
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "lehmann.patt",
 	})
-
 	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
-
 	let video = document.getElementById( 'video' );
 	let texture = new THREE.VideoTexture( video );
 	texture.minFilter = THREE.LinearFilter;
@@ -152,22 +135,18 @@ function initialize()
 	
 	markerRoot1.add( mesh1 );
 }
-
-
 function update()
 {
 	// update artoolkit on every frame
 	if ( arToolkitSource.ready !== false )
 		arToolkitContext.update( arToolkitSource.domElement );
+	
 }
-
-
 function render()
 {
 	renderer.render( scene, camera );
+	
 }
-
-
 function animate()
 {
 	requestAnimationFrame(animate);
@@ -176,8 +155,8 @@ function animate()
 	update();
 	render();
 	
+	
 }
-
 </script>
 
 </body>
