@@ -116,7 +116,7 @@ function initialize()
 
 	let geometry1 = new THREE.PlaneBufferGeometry(1,1, 4,4);
 	let loader = new THREE.TextureLoader();
-	// let texture = loader.load( 'images/earth.jpg', render );
+	// let texture = loader.load( 'https://stemkoski.github.io/AR-Examples/images/earth.jpg', render );
 	let material1 = new THREE.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5 } );
 	mesh1 = new THREE.Mesh( geometry1, material1 );
 	mesh1.rotation.x = -Math.PI/2;
@@ -131,7 +131,7 @@ function initialize()
 			materials.preload();
 			new THREE.OBJLoader()
 				.setMaterials( materials )
-				.setPath( 'models/' )
+				.setPath( 'https://stemkoski.github.io/AR-Examples/models/' )
 				.load( 'fish-2.obj', function ( group ) {
 					mesh0 = group.children[0];
 					mesh0.material.side = THREE.DoubleSide;
