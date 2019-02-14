@@ -16,7 +16,7 @@
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; display:block; background-color:#005dab;'>
-   <button type="button" onclick="alert('Hello world!')" style="z-index:9999999!important;display:none;"  id='test'>Click Me!</button>
+   <button type="button" onclick="alert('Hello world!')" style="z-index:9999999!important;display:block;"  id='test'>Click Me!</button>
 </div>
 <video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none" >
 	<source src="https://stemkoski.github.io/AR-Examples/video/sintel.ogv" type='video/ogg; codecs="theora, vorbis"'>
@@ -40,7 +40,10 @@ var mesh1;
 
 initialize();
 animate();
-
+	
+function myFunction() {
+  document.getElementById("test").style.display = "none";
+}
 function initialize()
 {
 	
@@ -91,7 +94,7 @@ function initialize()
 		if ( arToolkitContext.arController !== null )
 		{
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
-			  document.getElementById("test").style.display="block";
+			
 		}	
 		
 	}
@@ -103,6 +106,7 @@ function initialize()
 	// handle resize event
 	window.addEventListener('resize', function(){
 		onResize()
+		
 	});
 	
 	////////////////////////////////////////////////////////////
@@ -158,6 +162,7 @@ function update()
 function render()
 {
 	renderer.render( scene, camera );
+	myFunction();
 }
 
 
