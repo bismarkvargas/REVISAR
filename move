@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Hello, world!</title>
-	<script src='https://stemkoski.github.io/AR-Examples/js/keyboard.js'></script>
+	<title>Hello, AR Cube!</title>
 	<!-- include three.js library -->
 	<script src='https://stemkoski.github.io/AR-Examples/js/three.js'></script>
+	<!-- include jsartookit -->
+	<script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.min.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.api.js"></script>
+	<!-- include threex.artoolkit -->
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitsource.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitcontext.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-arbasecontrols.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-armarkercontrols.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-arsmoothedcontrols.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
 <!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
+  Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
 -->
 
 <script>
 
-var scene, camera, renderer, clock, deltaTime, totalTime, keyboard;
+var scene, camera, renderer, clock, deltaTime, totalTime;
 
-var mover;
+var arToolkitSource, arToolkitContext, smoothedControls;
+
+var markerRoot1, markerRoot2;
+
+var portal, portalMaterial;
 
 initialize();
 animate();
@@ -25,106 +38,227 @@ animate();
 function initialize()
 {
 	scene = new THREE.Scene();
-				
-	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
-	camera.position.set(0, 2, 4);
-	camera.lookAt( scene.position );	
-	scene.add( camera );
 
-	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1.00 );
+	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
 	scene.add( ambientLight );
-	
-	// let pointLight = new THREE.PointLight();
-	// camera.add( pointLight );
-	
+				
+	camera = new THREE.Camera();
+	scene.add(camera);
+
 	renderer = new THREE.WebGLRenderer({
 		antialias : true,
-		alpha: false
+		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( 640, 480 );
 	renderer.domElement.style.position = 'absolute'
-	renderer.domElement.style.top  = '0px'
+	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
 	document.body.appendChild( renderer.domElement );
-	window.addEventListener( 'resize', onWindowResize, false );
 
 	clock = new THREE.Clock();
 	deltaTime = 0;
 	totalTime = 0;
 	
-	keyboard = new Keyboard();
+	////////////////////////////////////////////////////////////
+	// setup arToolkitSource
+	////////////////////////////////////////////////////////////
+
+	arToolkitSource = new THREEx.ArToolkitSource({
+		sourceType : 'webcam',
+	});
+
+	function onResize()
+	{
+		arToolkitSource.onResize()	
+		arToolkitSource.copySizeTo(renderer.domElement)	
+		if ( arToolkitContext.arController !== null )
+		{
+			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+		}	
+	}
+
+	arToolkitSource.init(function onReady(){
+		onResize()
+	});
+	
+	// handle resize event
+	window.addEventListener('resize', function(){
+		onResize()
+	});
+	
+	////////////////////////////////////////////////////////////
+	// setup arToolkitContext
+	////////////////////////////////////////////////////////////	
+
+	// create atToolkitContext
+	arToolkitContext = new THREEx.ArToolkitContext({
+		cameraParametersUrl: 'https://stemkoski.github.io/AR-Examples/data/camera_para.dat',
+		detectionMode: 'mono'
+	});
+	
+	// copy projection matrix to camera when initialization complete
+	arToolkitContext.init( function onCompleted(){
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+	});
+
+	////////////////////////////////////////////////////////////
+	// setup markerRoots
+	////////////////////////////////////////////////////////////
+
+	// build markerControls
+	kanjiMarker = new THREE.Group();
+	scene.add(kanjiMarker);
+	
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, kanjiMarker, {
+		type : 'pattern',
+		patternUrl : "https://stemkoski.github.io/AR-Examples/data/lehmann.patt",
+	})
+
+	// interpolates from last position to create smoother transitions when moving.
+	// parameter lerp values near 0 are slow, near 1 are fast (instantaneous).
+	let smoothedRoot = new THREE.Group();
+	scene.add(smoothedRoot);
+	smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
+		lerpPosition: 0.5,
+		lerpQuaternion: 0.5,
+		lerpScale: 1,
+		// minVisibleDelay: 1,
+		// minUnvisibleDelay: 1,
+	});
+
+	////////////////////////////////////////////////////////////
+	// setup scene
+	////////////////////////////////////////////////////////////
 	
 	let loader = new THREE.TextureLoader();
 	
-	// floor
-	let floorGeometry = new THREE.PlaneGeometry(10,10);
-	let floorMaterial = new THREE.MeshBasicMaterial({ 
-		map: loader.load( 'https://stemkoski.github.io/AR-Examples/images/color-grid.png' )
+	// material for portal (for debugging)
+	
+	let defaultMaterial = new THREE.MeshBasicMaterial({
+		map: loader.load("https://stemkoski.github.io/AR-Examples/images/sphere-colored.png"), 
+		color: 0x444444,
+		side: THREE.DoubleSide,
+		transparent: true,
+		opacity: 0.6
 	});
-	let floorMesh = new THREE.Mesh( floorGeometry, floorMaterial );
-	floorMesh.rotation.x = -Math.PI/2;
-	scene.add( floorMesh );
 	
-	let cubeGeometry = new THREE.BoxGeometry(1,1,1);
-	let materialArray = [
-		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/xpos.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/xneg.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/ypos.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/yneg.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/zpos.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/zneg.png") } ),
+	let portalWidth = 2;
+	let portalHeight = 4;
+	let portalBorder = 0.1;
+	
+	portal = new THREE.Mesh(
+		new THREE.PlaneGeometry(portalWidth, portalHeight),
+		defaultMaterial
+	);
+	portal.position.y = portalHeight/2 + portalBorder;
+	portal.layers.set(1);
+	smoothedRoot.add(portal);
+	
+	camera.layers.enable(1);
+	
+	portalMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide, transparent:true, opacity: 0.75 });
+	
+	
+	let portalBorderMesh = new THREE.Mesh(
+		new THREE.PlaneGeometry(portalWidth + 2*portalBorder, portalHeight + 2*portalBorder),
+		portalMaterial
+	);
+	portalBorderMesh.position.y = portal.position.y;
+	portalBorderMesh.layers.set(0);
+	smoothedRoot.add(portalBorderMesh);
+	
+	// the world beyond the portal
+	
+	// textures from http://www.humus.name/
+	let skyMaterialArray = [
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/mountain/posx.jpg"), side: THREE.BackSide } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/mountain/negx.jpg"), side: THREE.BackSide } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/mountain/posy.jpg"), side: THREE.BackSide } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/mountain/negy.jpg"), side: THREE.BackSide } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/mountain/posz.jpg"), side: THREE.BackSide } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/mountain/negz.jpg"), side: THREE.BackSide } ),
 	];
-	let cubeMesh = new THREE.Mesh( cubeGeometry, materialArray );
-	
-	mover = new THREE.Group();
-	mover.add( cubeMesh );
-	mover.position.y = 0.5;
-	scene.add( mover );
+	let skyMesh = new THREE.Mesh(
+		new THREE.CubeGeometry(30,30,30),
+		skyMaterialArray );
+	skyMesh.layers.set(2);
+	smoothedRoot.add(skyMesh);
+
 }
+
 
 function update()
 {
-	keyboard.update();
+	// portal ring color cycle
+	portalMaterial.color.setHSL( totalTime/10 % 1, 1, 0.75 );
 	
-	let translateSpeed = 0.5; // units per second
-	let distance = translateSpeed * deltaTime;
-	let rotateSpeed = Math.PI/3; // radians per second
-	let angle = rotateSpeed * deltaTime;
-	
-	if (keyboard.isKeyPressed("W"))
-		mover.translateZ( -distance );
-	if (keyboard.isKeyPressed("S"))
-		mover.translateZ( distance );
+	// update artoolkit on every frame
+	if ( arToolkitSource.ready !== false )
+		arToolkitContext.update( arToolkitSource.domElement );
 		
-	if (keyboard.isKeyPressed("A"))
-		mover.translateX( -distance );
-	if (keyboard.isKeyPressed("D"))
-		mover.translateX( distance );
-		
-	if (keyboard.isKeyPressed("R"))
-		mover.translateY( distance );
-	if (keyboard.isKeyPressed("F"))
-		mover.translateY( -distance );
-		
-	if (keyboard.isKeyPressed("Q"))
-		mover.rotateY( angle );
-	if (keyboard.isKeyPressed("E"))
-		mover.rotateY( -angle );
-		
-	if (keyboard.isKeyPressed("T"))
-		mover.children[0].rotateX( angle );
-	if (keyboard.isKeyPressed("G"))
-		mover.children[0].rotateX( -angle );
-	
-	
-	//mesh.rotation.y += 0.01;
+	// additional code for smoothed controls
+	smoothedControls.update(kanjiMarker);
 }
+
 
 function render()
 {
+	//renderer.render( scene, camera );
+
+	let gl = renderer.context;
+	
+	// clear buffers now: color, depth, stencil 
+	renderer.clear(true,true,true);
+	// do not clear buffers before each render pass
+	renderer.autoClear = false;
+		
+	// FIRST PASS
+	// goal: using the stencil buffer, place 1's in position of first portal (layer 1)
+
+	// enable the stencil buffer
+	gl.enable(gl.STENCIL_TEST);
+	
+	// layer 1 contains only the first portal
+	camera.layers.set(1); 
+
+	gl.stencilFunc(gl.ALWAYS, 1, 0xff);
+	gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
+	gl.stencilMask(0xff);
+
+	// only write to stencil buffer (not color or depth)
+	gl.colorMask(false,false,false,false);
+	gl.depthMask(false);
+	
 	renderer.render( scene, camera );
+
+	// SECOND PASS
+	// goal: render skybox (layer 2) but only through portal
+	
+	gl.colorMask(true,true,true,true);
+	gl.depthMask(true);
+	
+	gl.stencilFunc(gl.EQUAL, 1, 0xff);
+	gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+	
+	camera.layers.set(2);
+	renderer.render( scene, camera );
+	
+	// FINAL PASS
+	// goal: render the rest of the scene (layer 0)
+	
+	// using stencil buffer simplifies drawing border around portal
+	gl.stencilFunc(gl.NOTEQUAL, 1, 0xff);
+	gl.colorMask(true,true,true,true);
+	gl.depthMask(true);
+	
+	camera.layers.set(0); // layer 0 contains portal border mesh
+	renderer.render( scene, camera );
+	
+	// set things back to normal
+	renderer.autoClear = true;
 }
+
 
 function animate()
 {
@@ -133,13 +267,6 @@ function animate()
 	totalTime += deltaTime;
 	update();
 	render();
-}
-
-function onWindowResize() 
-{
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
 </script>
