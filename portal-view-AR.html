@@ -3,15 +3,15 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<title>Hello, world!</title>
 	<!-- include three.js library -->
-	<script src='https://github.com/stemkoski/AR-Examples/js/three.js'></script>
-	<!-- include https://github.com/stemkoski/AR-Examples/jsartookit -->
-	<script src="https://github.com/stemkoski/AR-Examples/jsartoolkit5/artoolkit.min.js"></script>
-	<script src="https://github.com/stemkoski/AR-Examples/jsartoolkit5/artoolkit.api.js"></script>
-	<!-- include https://github.com/stemkoski/AR-Examples/threex.artoolkit -->
-	<script src="https://github.com/stemkoski/AR-Examples/threex/threex-artoolkitsource.js"></script>
-	<script src="https://github.com/stemkoski/AR-Examples/threex/threex-artoolkitcontext.js"></script>
-	<script src="https://github.com/stemkoski/AR-Examples/threex/threex-arbasecontrols.js"></script>
-	<script src="https://github.com/stemkoski/AR-Examples/threex/threex-armarkercontrols.js"></script>
+	<script src='https://stemkoski.github.io/AR-Examples/js/three.js'></script>
+	<!-- include https://stemkoski.github.io/AR-Examples/jsartookit -->
+	<script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.min.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.api.js"></script>
+	<!-- include https://stemkoski.github.io/AR-Examples/threex.artoolkit -->
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitsource.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitcontext.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-arbasecontrols.js"></script>
+	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-armarkercontrols.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -92,7 +92,7 @@ function initialize()
 
 	// create atToolkitContext
 	arToolkitContext = new THREEx.ArToolkitContext({
-		cameraParametersUrl: 'https://github.com/stemkoski/AR-Examples/data/camera_para.dat',
+		cameraParametersUrl: 'https://stemkoski.github.io/AR-Examples/data/camera_para.dat',
 		detectionMode: 'mono'
 	});
 	
@@ -115,7 +115,7 @@ function initialize()
 	let geometry1 = new THREE.SphereGeometry(1, 32,32);
 	
 	let loader = new THREE.TextureLoader();
-	let texture = loader.load( 'https://github.com/stemkoski/AR-Examples/blob/master/images/earth-sphere.jpg', render );
+	let texture = loader.load( 'https://stemkoski.github.io/AR-Examples//images/earth-sphere.jpg', render );
 	let material1 = new THREE.MeshLambertMaterial( { map: texture, opacity: 0.5 } );
 	
 	mesh1 = new THREE.Mesh( geometry1, material1 );
