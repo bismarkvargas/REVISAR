@@ -68,12 +68,12 @@ function initialize()
 	
 	let cubeGeometry = new THREE.BoxGeometry(1,1,1);
 	let materialArray = [
-		new THREE.MeshBasicMaterial( { map: loader.load("images/xpos.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("images/xneg.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("images/ypos.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("images/yneg.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("images/zpos.png") } ),
-		new THREE.MeshBasicMaterial( { map: loader.load("images/zneg.png") } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/xpos.png") } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/xneg.png") } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/ypos.png") } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/yneg.png") } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/zpos.png") } ),
+		new THREE.MeshBasicMaterial( { map: loader.load("https://stemkoski.github.io/AR-Examples/images/zneg.png") } ),
 	];
 	let cubeMesh = new THREE.Mesh( cubeGeometry, materialArray );
 	
