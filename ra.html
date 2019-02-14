@@ -42,14 +42,10 @@ initialize();
 animate();
 	
 function myFunction() {
- // document.getElementById("test").style.display = "block";
+ document.getElementById("test").style.display = "block";
 }
 function initialize()
-{
-	
-   
-       
- 
+{       
 	scene = new THREE.Scene();
 
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
@@ -106,7 +102,7 @@ function initialize()
 	// handle resize event
 	window.addEventListener('resize', function(){
 		onResize();
-		alert('holaa');
+		
 	});
 	
 	////////////////////////////////////////////////////////////
@@ -162,7 +158,7 @@ function update()
 function render()
 {
 	renderer.render( scene, camera );
-	
+	alert('holaa');
 }
 
 
