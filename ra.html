@@ -42,7 +42,11 @@ initialize();
 animate();
 
 function initialize()
-{
+{//////////////////////////
+	
+   
+         document.getElementById("test").style.display="block";
+   
 	scene = new THREE.Scene();
 
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
@@ -56,7 +60,7 @@ function initialize()
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( 800, 480 );
+	renderer.setSize( 600, 480 );
 	renderer.domElement.style.position = 'relative'
 	renderer.domElement.style.top = '100px'
 	renderer.domElement.style.left = '0px'
@@ -67,11 +71,7 @@ function initialize()
 	totalTime = 0;
 	
 	
-	//////////////////////////
 	
-   
-         document.getElementById("test").style.display="block";
-   
        
 	
 	
@@ -166,6 +166,7 @@ function animate()
 	totalTime += deltaTime;
 	update();
 	render();
+	
 }
 
 </script>
