@@ -15,8 +15,10 @@
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-<b >hola</b>
-	<button type="button" onclick="alert('Hello world!')" style="z-index:9999999!important;">Click Me!</button>
+<div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+   <button type="button" onclick="alert('Hello world!')" style="z-index:9999999!important;">Click Me!</button>
+</div>
+	
 <video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none" >
 	<source src="https://stemkoski.github.io/AR-Examples/video/sintel.ogv" type='video/ogg; codecs="theora, vorbis"'>
 	<source src="Comprando_desktop.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
