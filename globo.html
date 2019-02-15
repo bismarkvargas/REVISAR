@@ -1,83 +1,35 @@
-<!DOCTYPE html>
-<head>
-<style>
-#myOnlineCamera video{width:320px;height:240px;margin:15px;float:left;}
-#myOnlineCamera canvas{width:320px;height:240px;margin:15px;float:left;}
-#myOnlineCamera button{clear:both;margin:30px;}
-</style>
-</head>
+<html lang=”en”>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+		<!-- Name of the app -->
+		<title>Camera App</title>
 
-<div id="myOnlineCamera">
-    <video></video>
-    <canvas></canvas>
-    <button>Take Photo!</button>
-</div>
-<script>
-var videoObj    = { "video": true },
-    errBack        = function(error){
-        // alert("Video capture error: ", error.code);
-    };
+		<!-- Link to main style sheet -->
+		<link rel="stylesheet" href="https://github.com/abenjamin765/camera-app/blob/master/part-1/style.css"> 
+	</head>
+	<body>
 
-// Ask the browser for permission to use the Webcam
-if(navigator.getUserMedia){                    // Standard
-    navigator.getUserMedia(videoObj, startWebcam, errBack);
-}else if(navigator.webkitGetUserMedia){        // WebKit
-    navigator.webkitGetUserMedia(videoObj, startWebcam, errBack);
-}else if(navigator.mozGetUserMedia){        // Firefox
-    navigator.mozGetUserMedia(videoObj, startWebcam, errBack);
-};
+		<!-- Camera -->
+		<main id="camera">
 
-function startWebcam(stream){
+		    <!-- Camera sensor -->
+		    <canvas id="camera--sensor"></canvas>
+		    
+		    <!-- Camera view -->
+		    <video id="camera--view" autoplay playsinline></video>
+		    
+		    <!-- Camera output -->
+		    <img src="//:0" alt="" id="camera--output">
 
-    var myOnlineCamera    = getElementById('myOnlineCamera'),
-        video            = myOnlineCamera.querySelectorAll('video'),
-        canvas            = myOnlineCamera.querySelectorAll('canvas');
+		    <!-- Camera trigger -->
+		    <button id="camera--trigger">Take a picture</button>
 
-    video.width = video.offsetWidth;
+		</main>
 
-    if(navigator.getUserMedia){                    // Standard
-        video.src = stream;
-        video.play();
-    }else if(navigator.webkitGetUserMedia){        // WebKit
-        video.src = window.webkitURL.createObjectURL(stream);
-        video.play();
-    }else if(navigator.mozGetUserMedia){        // Firefox
-        video.src = window.URL.createObjectURL(stream);
-        video.play();
-    };
-
-    // Click to take the photo
-    $('#webcam-popup .takephoto').click(function(){
-        // Copying the image in a temporary canvas
-        var temp = document.createElement('canvas');
-
-        temp.width  = video.offsetWidth;
-        temp.height = video.offsetHeight;
-
-        var tempcontext = temp.getContext("2d"),
-            tempScale = (temp.height/temp.width);
-
-        temp.drawImage(
-            video,
-            0, 0,
-            video.offsetWidth, video.offsetHeight
-        );
-
-        // Resize it to the size of our canvas
-        canvas.style.height    = parseInt( canvas.offsetWidth * tempScale );
-        canvas.width        = canvas.offsetWidth;
-        canvas.height        = canvas.offsetHeight;
-        var context        = canvas.getContext("2d"),
-            scale        = canvas.width/temp.width;
-        context.scale(scale, scale);
-        context.drawImage(bigimage, 0, 0);
-    });
-};
-
-
-</script>
-
-</body>
+		<!-- Reference to your JavaScript file -->
+		<script src="https://github.com/abenjamin765/camera-app/blob/master/part-1/app.js"></script> 
+	</body>
 </html>
