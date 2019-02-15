@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
 	<title>Hello, world!</title>
@@ -12,10 +12,14 @@
 	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitcontext.js"></script>
 	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-arbasecontrols.js"></script>
 	<script src="https://stemkoski.github.io/AR-Examples/threex/threex-armarkercontrols.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-<div style='position: absolute; top: 0px; width:100%; text-align: center; z-index: 1; display:block; background-color:#005dab;'>
+<body style='margin : 0px; overflow: hidden; font-family: Monospace; background-color:blue;'>
+<div style='position: absolute; top: 0px; width:100%; text-align: center; z-index: 1; display:block; '>
    <button type="button" onclick="get();" style="z-index:9999999!important; padding:10px 10px 10px 10px; margin-top:5px;margin-bottom:5px;"  id='test'>Comprar productos</button>
 </div>
 
@@ -24,11 +28,12 @@
 	
 	<source src="colores.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 </video>
+<img class="img-responsive" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
 	<footer style="
-position:fixed;
-bottom: 0px;
-width: 400px;
-text-align: center; width:100%;"><img src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/></footer>	
+
+margin-top:50px;
+width: 80%;
+"></footer>	
 <!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
