@@ -1,12 +1,35 @@
-<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
-<body style='margin : 0px; overflow: hidden;'>
-    <a-scene embedded arjs='trackingMethod: best; debugUIEnabled: false;'>
-      <!--a-marker type='pattern' url='https://rawgit.com/germanviscuso/AR.js/master/data/data/patt.gafas'-->
-      <a-marker preset='hiro'>
-        <a-collada-model src="url(https://aframe.io/aframe/examples/showcase/shopping/man/man.dae)"></a-collada-model>
-      </a-marker>
-      <a-camera-static/>
-    </a-scene>
+<!DOCTYPE html>
+<script src="https://curious-electric.com/w/experiments/aframe/ar-generic/js/aframe.min.js"></script>
+<!-- include aframe-ar.js -->
+<script src="https://curious-electric.com/w/experiments/aframe/ar-generic/js/aframe-ar.js?a"></script>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+</div>
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+
+		<!-- handle hiro marker -->
+		<a-marker preset='hiroo'>
+			<a-box position='0 0.5 0' scale="0.5 0.5 0.5" material='opacity: 0.5; side: double;color:red;'>
+				<a-torus-knot radius='0.26' radius-tubular='0.05'>
+					<a-animation attribute="rotation" to="360 0 0" dur="5000" easing='linear' repeat="indefinite"></a-animation>
+				</a-torus-knot>
+			</a-box>
+		</a-marker>
+
+		<!-- handle kanji marker -->
+		<a-marker preset='kanji'>
+			<a-box position='0 0.5 0' scale="0.5 0.5 0.5"  material='opacity: 0.5; side: double;color:green;'>
+				<a-torus-knot radius='0.26' radius-tubular='0.05'>
+					<a-animation attribute="rotation" to="360 0 0" dur="5000" easing='linear' repeat="indefinite"></a-animation>
+				</a-torus-knot>
+			</a-box>
+		</a-marker>
+
+		<a-entity camera></a-entity>
+	</a-scene>
+	<script>
+		document.querySelector("#arjsDebugUIContainer").style = "display: none";
+		
+	</script>
 </body>
+</html>
