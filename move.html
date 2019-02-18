@@ -39,7 +39,8 @@
  
 	   <!-- define a camera which will move according to the marker position -->
  <a-marker preset="pattern" type="pattern" url="https://github.com/bismarkvargas/RA/blob/master/photo_book.patt">
-   <a-box position='0 0.5 0' material='color: black;' soundhandler></a-box>
+   <a-image id=2" src="https://www.clipartmax.com/png/middle/59-598439_cara-enamorada-el-significado-de-los-emojis-de-whatsapp-smiley-smirk-png.png" position="0 0 0" rotation="-90 0 0" width="2" 
+							 height="2" opacity="1" transparent="true" alpha-test="0.2" shader="standard" scale="1 1 1" visible="" material="" geometry=""></a-image>
  </a-marker>
    <!-- <a-marker-camera preset='custom' patternUrl='https://github.com/bismarkvargas/RA/blob/master/photo_book.patt'>
 	 <a-image id=2" src="https://www.clipartmax.com/png/middle/59-598439_cara-enamorada-el-significado-de-los-emojis-de-whatsapp-smiley-smirk-png.png" position="0 0 0" rotation="-90 0 0" width="2" 
@@ -74,27 +75,7 @@ function hide(){
 document.getElementById("imagen").style.display = "block";
 
 }
-if( _this.data.preset === 'hiro' ){
-	arProfile.defaultMarkerParameters.type = 'pattern'
-	arProfile.defaultMarkerParameters.patternUrl = THREEx.ArToolkitContext.baseURL+'examples/marker-training/examples/pattern-files/pattern-hiro.patt'
-	arProfile.defaultMarkerParameters.markersAreaEnabled = false
-}else if( _this.data.preset === 'kanji' ){
-	arProfile.defaultMarkerParameters.type = 'pattern'
-	arProfile.defaultMarkerParameters.patternUrl = THREEx.ArToolkitContext.baseURL+'examples/marker-training/examples/pattern-files/pattern-kanji.patt'
-	arProfile.defaultMarkerParameters.markersAreaEnabled = false
-}else if( _this.data.preset === 'area' ){
-	arProfile.defaultMarkerParameters.type = 'barcode'
-	arProfile.defaultMarkerParameters.barcodeValue = 1001	
-	arProfile.defaultMarkerParameters.markersAreaEnabled = true
- 
-}else if( _this.data.preset === 'custom' ){
-		arProfile.defaultMarkerParameters.type = 'pattern'
-		arProfile.defaultMarkerParameters.patternUrl = _this.data.patternUrl;
-		arProfile.defaultMarkerParameters.markersAreaEnabled = false
- 
-}else {
-	alert( this.data.preset === '', 'illegal preset value '+this.data.preset)
-}
+
 
 </script>
 
