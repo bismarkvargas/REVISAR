@@ -11,7 +11,7 @@
 <div class="container">
 <div class="row">
     <div class="col-md-6 offset-md-3"style=' top: 0px; width:100%; text-align: center; z-index: 1; display:block; '>
-  <!-- <button type="button" onclick="get();" style="z-index:9999999!important; padding:10px 10px 10px 10px; margin-top:5px;margin-bottom:5px;"  id='test'>Comprar productos</button>-->
+  <button type="button" onclick="data();" style="z-index:9999999!important; padding:10px 10px 10px 10px; margin-top:5px;margin-bottom:5px;"  id='test'>Comprar productos</button>
 <center>
 	
 </center>
@@ -55,10 +55,17 @@
 
 
 <script>
-else if( _this.data.preset === 'custom' )
-{ arProfile.defaultMarkerParameters.type = 'pattern'
- arProfile.defaultMarkerParameters.patternUrl = _this.data.patternUrl; 
- arProfile.defaultMarkerParameters.markersAreaEnabled = false
+function data(){
+var canvas = sceneEl.canvas;
+
+// here is the most important part because if you dont replace you will get a DOM 18 exception.
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+
+window.location.href=image; 
+
+}
+
+
 
 
 </script>
