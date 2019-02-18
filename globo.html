@@ -1,35 +1,35 @@
-<html lang=”en”>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- Name of the app -->
-		<title>Camera App</title>
+<!DOCTYPE html>
+<script src="https://jeromeetienne.github.io/AR.js/aframe/examples/vendor/aframe/build/aframe.min.js"></script>
+<!-- include aframe-ar.js -->
+<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-		<!-- Link to main style sheet -->
-		<link rel="stylesheet" href="https://github.com/abenjamin765/camera-app/blob/master/part-1/style.css"> 
-	</head>
-	<body>
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
 
-		<!-- Camera -->
-		<main id="camera">
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-md-6 offset-md-3"style=' top: 0px; width:100%; text-align: center; z-index: 1; display:block; '>
+  <!-- <button type="button" onclick="get();" style="z-index:9999999!important; padding:10px 10px 10px 10px; margin-top:5px;margin-bottom:5px;"  id='test'>Comprar productos</button>-->
+<center>
+	<img style="display:none;" id="imagen" class="img-fluid" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
+	
+</center>
+</div></div></div>
 
-		    <!-- Camera sensor -->
-		    <canvas id="camera--sensor"></canvas>
-		    
-		    <!-- Camera view -->
-		    <video id="camera--view" autoplay playsinline></video>
-		    
-		    <!-- Camera output -->
-		    <img src="//:0" alt="" id="camera--output">
 
-		    <!-- Camera trigger -->
-		    <button id="camera--trigger">Take a picture</button>
 
-		</main>
+<script>
+function hide(){
+document.getElementById("imagen").style.display = "block";
 
-		<!-- Reference to your JavaScript file -->
-		<script src="https://github.com/abenjamin765/camera-app/blob/master/part-1/app.js"></script> 
-	</body>
+}
+
+
+</script>
+
+
+</body>
 </html>
+
