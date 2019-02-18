@@ -63,7 +63,8 @@ function data(){
 
  //here is the most important part because if you dont replace you will get a DOM 18 exception.
 //var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
-alert('hola'+document.querySelector('a-scene').components.screenshot.capture('perspective'));
+alert('hola');
+document.querySelector('a-scene').components.screenshot.capture('perspective')
 //window.location.href=image; 
 //document.querySelector('a-scene').components.screenshot.getCanvas('equirectangular')
 //document.querySelector('a-scene').components.screenshot.getCanvas('equirectangular');
