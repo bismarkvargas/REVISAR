@@ -4,11 +4,11 @@
 <!-- include aframe-ar.js -->
 <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;background-color:blue;'>
 <div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
-	<img style=' top: 10px; width:100%; padding:20px 20px 20px 20px; text-align: center; z-index: 2; display:block;position:absolute; border:1px solid #021a40; '  id="imagen" class="img-fluid" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
-
+ <a id="download">	<img style=' top: 10px; width:100%; padding:20px 20px 20px 20px; text-align: center; z-index: 2; display:block;position:absolute; border:1px solid #021a40; '  id="imagen" class="img-fluid" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
+</a>
 <div class="row  justify-content-center align-items-center">
 <div class="embed-responsive embed-responsive-1by1" style=" top: 150px; width:90%;height:600px text-align: center; z-index: 1; display:block; position:absolute;">
 
@@ -34,6 +34,14 @@ document.getElementById("imagen").style.display = "block";
 
 }
 
+html2canvas(document.body, {
+  onrendered (canvas) {
+    var link = document.getElementById('download');;
+    var image = canvas.toDataURL();
+    link.href = image;
+    link.download = 'screenshot.png';
+  }
+ });
 
 </script>
 
