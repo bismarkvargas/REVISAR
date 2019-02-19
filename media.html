@@ -168,11 +168,7 @@
             resizedCanvas.height = height;
           
             resizedContext.drawImage(video, 0, 0, width, height);
-			//agregamos el marco al canvas 
-            var img = new Image();
-            img.src = "https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png";
-		    img.onload = function(){
-            resizedContext.drawImage(img, 0, 0);
+			
 			
 			
 			
@@ -181,6 +177,11 @@
             if (width > height) {
                
                 resizedContext.drawImage(aScene, 0, 0, width, height);
+				//agregamos el marco al canvas 
+            var img = new Image();
+            img.src = "https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png";
+		    img.onload = function(){
+            resizedContext.drawImage(img, 0, 0);
             } else {
              
                 var scale = height / width;
