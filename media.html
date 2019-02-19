@@ -10,7 +10,7 @@
    <script src="https://bismarkvargas.github.io/RA/aframe-ar.js"></script>
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
+	<style>
         .ui {
             position: absolute;
             z-index: 100;
@@ -96,7 +96,10 @@
     <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
     <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
     <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
+	
+
 </div>
+
 </body>
 <script>
     var image = document.querySelector('#snap');
@@ -135,14 +138,15 @@
     });
 
     function takeSnapshot(video) {
-	//mensaje de espera 
-	swal("Espera 5 segundos sin mover la cámara", {
-  buttons: false,
-  timer: 5000,
-});
-	
-	
-	
+       	//mensaje de espera 
+       
+     swal({
+    title: "Tomando fotografía",
+    text: "Por favor no mueva su cámara.",
+    timer: 4000,
+    showConfirmButton: false
+  });
+
 	
         var resizedCanvas = document.createElement("canvas");
         var resizedContext = resizedCanvas.getContext("2d");
