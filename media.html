@@ -58,6 +58,10 @@
         #snap.visible {
             visibility: visible;
         }
+		canvas{
+		border: 2px solid #005dab!important;
+		
+		}
     </style>
 
 </head>
@@ -66,7 +70,7 @@
 
 <a-scene embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
   
-	<b>hola</b>
+	
 		
 	   <!-- marker custom1 -->
                     <a-marker preset='custom' type='pattern' url='https://bismarkvargas.github.io/RA/photo_book.patt'>
@@ -92,6 +96,8 @@
     <a-entity camera></a-entity>
 </a-scene>
 <div class="ui">
+
+
     <img id="snap">
     <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
     <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
@@ -137,6 +143,7 @@
     function takeSnapshot(video) {
         var resizedCanvas = document.createElement("canvas");
         var resizedContext = resizedCanvas.getContext("2d");
+		resizedCanvas.setAttribute("id", "canvas_new");
         var width = video.videoWidth;
         var height = video.videoHeight;
         var aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
@@ -148,13 +155,7 @@
           
             resizedContext.drawImage(video, 0, 0, width, height);
 
-			//ponemos imagen de fondo 
-			var background = new Image();
-            background.src = "http://i.imgur.com/yf6d9SX.jpg";
-            
-            background.onload = function(){
-                resizedCanvas.drawImage(background,0,0);   
-            }
+			
 			
 			
         
@@ -172,6 +173,11 @@
         }
     }
 
+
+	
+	
+	
+	
     //-->
 </script>
 </html>
