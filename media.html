@@ -10,6 +10,7 @@
    <script src="https://bismarkvargas.github.io/RA/aframe-ar.js"></script>
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style>
         .ui {
             position: absolute;
@@ -63,7 +64,9 @@
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-
+<div class="spinner-grow text-primary" role="status" id="status" style="display:none;">
+  <span class="sr-only">Loading...</span>
+</div>
 <a-scene embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
 
  
@@ -111,15 +114,7 @@
   
     take_photo_btn.addEventListener("click", function (e) {
         e.preventDefault();
-		 	//mensaje de espera 
-       
-     swal({
-    title: "Tomando fotografía",
-    text: "Por favor no mueva su cámara.",
-    timer: 4000,
-    showConfirmButton: false
-  });
-        var video = document.querySelector('video');
+	    var video = document.querySelector('video');
         var snap = takeSnapshot(video);
 
       
@@ -148,18 +143,14 @@
 
     function takeSnapshot(video) {
       
-
+        document.getElementById("status").style.display = "block";
 	
         var resizedCanvas = document.createElement("canvas");
         var resizedContext = resizedCanvas.getContext("2d");
         var width = video.videoWidth;
         var height = video.videoHeight;
         var aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
-        //agregamos el marco al canvas 
-        var img = new Image();
-        img.src = "https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png";
-		img.onload = function(){
-        resizedCanvas.drawImage(img, 0, 0);
+        
         }
         if (width && height) {
            
