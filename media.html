@@ -154,7 +154,7 @@
 		
 		
 		
-		draw();
+		
         var aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
 
         if (width && height) {
@@ -183,16 +183,7 @@
     }
 
 
-	function draw() {
-      var ctx = document.getElementById('canvas').getContext('2d');
-      var img = new Image();
-      img.onload = function() {
-      ctx.drawImage(img, 0, 0);
-  
-  };
-  img.src = 'https://images.vexels.com/media/users/3/153779/isolated/preview/46cc7b82916113e4581711ef0a106d8d-magician-top-hat-icon-by-vexels.png';
-}
-	
+
 	
 	
     //-->
