@@ -8,7 +8,7 @@
  
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
    <script src="https://bismarkvargas.github.io/RA/aframe-ar.js"></script>
-
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         .ui {
@@ -135,6 +135,15 @@
     });
 
     function takeSnapshot(video) {
+	//mensaje de espera 
+	swal("Espera 5 segundos sin mover la cámara", {
+  buttons: false,
+  timer: 5000,
+});
+	
+	
+	
+	
         var resizedCanvas = document.createElement("canvas");
         var resizedContext = resizedCanvas.getContext("2d");
         var width = video.videoWidth;
