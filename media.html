@@ -65,11 +65,7 @@
 		}
 		
 		a-scene {
-		  background-image: url('https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-   
-  height:1000px; 
+		
 		}
 		
     </style>
@@ -104,7 +100,7 @@
 		</a-marker>
 		
 	
-    <a-entity camera="zoom: 1" look-controls wasd-controls position="0 1.6 0" data-aframe-default-camera ></a-entity>
+    <a-entity camera></a-entity>
 </a-scene>
 <div class="ui">
 
@@ -172,7 +168,12 @@
             resizedCanvas.height = height;
           
             resizedContext.drawImage(video, 0, 0, width, height);
-
+			//agregamos el marco al canvas 
+            var img = new Image();
+            img.src = "https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png";
+		    img.onload = function(){
+            resizedContext.drawImage(img, 0, 0);
+			
 			
 			
 			
