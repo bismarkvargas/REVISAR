@@ -8,7 +8,8 @@
  
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
    <script src="https://bismarkvargas.github.io/RA/aframe-ar.js"></script>
-  
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         .ui {
@@ -67,8 +68,11 @@
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-<img style=' top: 10px; width:100%; padding:20px 20px 20px 20px; text-align: center; z-index: 2; display:block;position:absolute; border:1px solid #021a40; ' 
-	id="imagen" class="img-fluid" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
+
+
+	<img style='  border:1px solid #021a40;position:absolute;width:90%; ' 
+	id="imagen" class="img-fluid justify-content-center align-items-center" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
+
 <a-scene embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
   
 	
