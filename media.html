@@ -67,7 +67,8 @@
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-
+<img style=' top: 10px; width:100%; padding:20px 20px 20px 20px; text-align: center; z-index: 2; display:block;position:absolute; border:1px solid #021a40; ' 
+	id="imagen" class="img-fluid" src="https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png"/>
 <a-scene embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
   
 	
@@ -146,13 +147,7 @@
 		
         var width = video.videoWidth;
         var height = video.videoHeight;
-		///agregamos las configuraciones graficas al canvas 
-		resizedCanvas.id = "canvas_new";
-        resizedCanvas.width = 1224;
-        resizedCanvas.height = 768;
-        resizedCanvas.style.zIndex = 8;
-        resizedCanvas.style.position = "absolute";
-        resizedCanvas.style.border = "5px solid #005dab";
+		
 		
 		
 		
