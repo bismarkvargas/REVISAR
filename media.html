@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="es">
 <head>
     <meta charset="utf-8">
    
@@ -8,7 +8,7 @@
  
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
    <script src="https://bismarkvargas.github.io/RA/aframe-ar.js"></script>
-  <!-- <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>-->
+  
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         .ui {
@@ -148,6 +148,15 @@
           
             resizedContext.drawImage(video, 0, 0, width, height);
 
+			//ponemos imagen de fondo 
+			var background = new Image();
+            background.src = "http://i.imgur.com/yf6d9SX.jpg";
+            
+            background.onload = function(){
+                resizedContext.drawImage(background,0,0);   
+            }
+			
+			
         
             if (width > height) {
                
