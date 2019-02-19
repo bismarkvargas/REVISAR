@@ -10,7 +10,6 @@
    <script src="https://bismarkvargas.github.io/RA/aframe-ar.js"></script>
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style>
         .ui {
             position: absolute;
@@ -64,9 +63,7 @@
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
-<div class="spinner-grow text-primary" role="status" id="status" style="display:none;">
-  <span class="sr-only">Loading...</span>
-</div>
+
 <a-scene embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
 
  
@@ -98,7 +95,7 @@
     <img id="snap">
     <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
     <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
-	<a href="" id="message" title="Message"><i class="material-icons">speaker_notes</i></a>
+	
     <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
 	
 
@@ -143,7 +140,7 @@
 
     function takeSnapshot(video) {
       
-        document.getElementById("status").style.display = "block";
+
 	
         var resizedCanvas = document.createElement("canvas");
         var resizedContext = resizedCanvas.getContext("2d");
