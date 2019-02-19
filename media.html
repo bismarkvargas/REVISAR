@@ -143,9 +143,20 @@
     function takeSnapshot(video) {
         var resizedCanvas = document.createElement("canvas");
         var resizedContext = resizedCanvas.getContext("2d");
-		resizedCanvas.setAttribute("id", "canvas_new");
+		
         var width = video.videoWidth;
         var height = video.videoHeight;
+		///agregamos las configuraciones graficas al canvas 
+		resizedCanvas.id = "CursorLayer";
+        resizedCanvas.width = 1224;
+        resizedCanvas.height = 768;
+        resizedCanvas.style.zIndex = 8;
+        resizedCanvas.style.position = "absolute";
+        resizedCanvas.style.border = "1px solid";
+		
+		
+		
+		
         var aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
 
         if (width && height) {
