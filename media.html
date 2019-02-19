@@ -63,6 +63,17 @@
 		border: 2px solid #005dab!important;
 		  border-radius: 50%;
 		}
+		
+		a-scene {
+		background-image: url("https://raw.githubusercontent.com/bismarkvargas/RA/master/photobook.png");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+		}
+		
     </style>
 
 </head>
@@ -71,7 +82,7 @@
 
 
 	
-<a-scene background='color: red' embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
+<a-scene  embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
  
 	   <!-- marker custom1 -->
                     <a-marker preset='custom' type='pattern' url='https://bismarkvargas.github.io/RA/photo_book.patt'>
@@ -95,7 +106,7 @@
 		</a-marker>
 		
 	
-    <a-entity camera></a-entity>
+    <a-entity camera="zoom: 1" look-controls wasd-controls position="0 1.6 0" data-aframe-default-camera ></a-entity>
 </a-scene>
 <div class="ui">
 
