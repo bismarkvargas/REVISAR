@@ -95,6 +95,7 @@
     <img id="snap">
     <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
     <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
+	<a href="" id="message" title="Message"><i class="material-icons">speaker_notes</i></a>
     <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
 	
 
@@ -110,6 +111,14 @@
   
     take_photo_btn.addEventListener("click", function (e) {
         e.preventDefault();
+		 	//mensaje de espera 
+       
+     swal({
+    title: "Tomando fotografía",
+    text: "Por favor no mueva su cámara.",
+    timer: 4000,
+    showConfirmButton: false
+  });
         var video = document.querySelector('video');
         var snap = takeSnapshot(video);
 
@@ -138,14 +147,7 @@
     });
 
     function takeSnapshot(video) {
-       	//mensaje de espera 
-       
-     swal({
-    title: "Tomando fotografía",
-    text: "Por favor no mueva su cámara.",
-    timer: 4000,
-    showConfirmButton: false
-  });
+      
 
 	
         var resizedCanvas = document.createElement("canvas");
